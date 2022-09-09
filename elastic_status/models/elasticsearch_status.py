@@ -1,6 +1,8 @@
 from elastic_status.models.elasticsearch_configuration import ElasticsearchConfiguration
 from elastic_status.models.alias_status import AliasStatus
 
+from rich.table import Table
+
 class ElasticsearchStatus:
     def __init__(self, config: ElasticsearchConfiguration):
         self.config = config
@@ -11,6 +13,28 @@ class ElasticsearchStatus:
             return
         self.aliases[name] = alias_status
 
+    def to_table(self) -> Table:
+        table = Table(title='Elasticsearch Tracked Aliases')
+        
+        table.add_column('Name', justify='left')
+        table.add_column('Alias', justify='left')
+        table.add_column('Status', justify='center')
+        table.add_column('Created', justify='right')
+        table.add_column('Docs', justify='right')
+
+        for name, alias in zip(self.aliases, self.aliases.values()):
+            if not alias: 
+                row = [name, '', '-', '', '']
+            else:
+                row = [name, 
+                    alias.alias, 
+                    alias.get_status(), 
+                    alias.get_age(), 
+                    alias.get_document_count()]
+            table.add_row(row)
+
+        return table
+        
     """
     def print(self):
         # print status

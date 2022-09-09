@@ -15,4 +15,5 @@ class ElasticsearchConfiguration:
     def from_config(path: str):
         with open(path, 'r', encoding='utf-8') as f:
             config = json.load(f)
-        return ElasticsearchConfiguration(**config)
+        ElasticsearchConfiguration.config = ElasticsearchConfiguration(**config)
+        return config
