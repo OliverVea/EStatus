@@ -2,7 +2,7 @@ from textual.app import App
 
 from datetime import datetime
 
-from rich.align import Align
+from rich.align import Align, VerticalCenter
 
 from textual.app import App
 from textual.widget import Widget
@@ -17,7 +17,8 @@ class StatusTable(Widget):
 
     def render(self):
         status = get_status(ElasticsearchConfiguration.config)
-        return status.to_table()
+        table = status.to_table()
+        return VerticalCenter(Align.center(table))
 
 
 class StatusApp(App):

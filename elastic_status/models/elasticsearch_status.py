@@ -9,8 +9,7 @@ class ElasticsearchStatus:
         self.aliases: dict[str, AliasStatus] = {}
 
     def add_alias(self, name: str, alias_status: AliasStatus):
-        if alias_status.name in self.aliases:
-            return
+        if name in self.aliases: return
         self.aliases[name] = alias_status
 
     def to_table(self) -> Table:
@@ -24,14 +23,17 @@ class ElasticsearchStatus:
 
         for name, alias in zip(self.aliases, self.aliases.values()):
             if not alias: 
-                row = [name, '', '-', '', '']
+                table.add_row(name, 
+                        '', 
+                        '-', 
+                        '', 
+                        '')
             else:
-                row = [name, 
-                    alias.alias, 
-                    alias.get_status(), 
-                    alias.get_age(), 
-                    alias.get_document_count()]
-            table.add_row(row)
+                table.add_row(name, 
+                        alias.alias, 
+                        alias.get_status(), 
+                        alias.get_age(), 
+                        alias.get_document_count())
 
         return table
         
