@@ -1,0 +1,15 @@
+{
+    "hostname": "localhost",
+    "port": 9200,
+    "refresh_seconds": 1.0,
+    "tracked_aliases": [
+        {
+            "name": "product",
+            "alias": "searchableproducts@b2c-dk-da"
+        },
+        {
+            "name": "preview",
+            "alias": "product-preview-alias@b2c-dk-da"
+        }
+    ]
+}
