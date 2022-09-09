@@ -1,4 +1,4 @@
-from elastic_status import Alias, Index, ElasticsearchConfiguration, ElasticsearchStatus
+from elastic_status import Alias, Index, ElasticsearchConfiguration, ElasticsearchStatus, AliasStatus
 import requests
 
 def cat_aliases(config: ElasticsearchConfiguration) -> list[Alias]:
