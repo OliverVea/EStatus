@@ -10,6 +10,10 @@
         {
             "name": "preview",
             "alias": "product-preview-alias@b2c-dk-da"
+        },
+        {
+            "name": "analysis",
+            "alias": "analysis-index@b2c-dk-da"
         }
     ]
 }

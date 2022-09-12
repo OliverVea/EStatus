@@ -1,11 +1,8 @@
-from textual.app import App
-
-from datetime import datetime
-
-from rich.align import Align, VerticalCenter
+from rich.align import Align
 
 from textual.app import App
 from textual.widget import Widget
+from textual.widgets import Footer
 
 from elastic_status.elasticsearch import get_status
 from elastic_status.models.elasticsearch_configuration import ElasticsearchConfiguration
@@ -16,11 +13,15 @@ class StatusTable(Widget):
         self.set_interval(ElasticsearchConfiguration.config.refresh_seconds, self.refresh)
 
     def render(self):
-        status = get_status(ElasticsearchConfiguration.config)
-        table = status.to_table()
-        return VerticalCenter(Align.center(table))
+        try:
+            status = get_status(ElasticsearchConfiguration.config)
+            table = status.to_table()
+            return Align.center(table)
+        except Exception:
+            return Align.center('Lost connection to elasticsearch.')
 
 
 class StatusApp(App):
     async def on_mount(self):
         await self.view.dock(StatusTable())
+        await self.view.dock(Footer(), edge='bottom')
