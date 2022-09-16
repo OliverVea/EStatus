@@ -15,24 +15,13 @@ class ElasticsearchStatus:
     def to_table(self) -> Table:
         table = Table(title='Elasticsearch Tracked Aliases')
         
-        table.add_column('Name', justify='left')
         table.add_column('Alias', justify='left')
+        table.add_column('Index', justify='left')
         table.add_column('Status', justify='center')
         table.add_column('Created', justify='right')
         table.add_column('Docs', justify='right')
 
-        for name, alias in zip(self.aliases, self.aliases.values()):
-            if not alias: 
-                table.add_row(name, 
-                        '', 
-                        '-', 
-                        '', 
-                        '')
-            else:
-                table.add_row(name, 
-                        alias.alias, 
-                        alias.get_status(), 
-                        alias.get_age(), 
-                        alias.get_document_count())
+        for alias in self.aliases.values():
+            alias.add_rows(table)
 
         return table
