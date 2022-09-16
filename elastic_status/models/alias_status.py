@@ -20,15 +20,14 @@ class AliasStatus:
 
     def get_age(self) -> str:
         delta = time.time() - self.created / 1000
-        if delta > WEEK:
-            return f'{int(delta / WEEK):d}w'
-        if delta > DAY:
-            return f'{int(delta / DAY):d}d'
-        if delta > HOUR:
-            return f'{int(delta / HOUR):d}h'
-        if delta > MINUTE:
-            return f'{int(delta / MINUTE):d}m'
-        return f'{delta // 1}s'
+
+        if delta > WEEK: factor, unit = WEEK, 'w'
+        elif delta > DAY: factor, unit = DAY, 'd'
+        elif delta > HOUR: factor, unit = HOUR, 'h'
+        elif delta > MINUTE: factor, unit = MINUTE, 'm'
+        else: factor, unit = 1, 's'
+
+        return f'{int(delta / factor):d}{unit}'
 
     def get_document_count(self) -> str:
         if self.document_count > 1e6:

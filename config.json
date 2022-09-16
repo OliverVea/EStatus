@@ -5,15 +5,18 @@
     "tracked_aliases": [
         {
             "name": "product",
-            "alias": "searchableproducts@b2c-dk-da"
+            "alias": "searchableproducts@b2c-dk-da",
+            "index_pattern": "product-index@"
         },
         {
             "name": "preview",
-            "alias": "product-preview-alias@b2c-dk-da"
+            "alias": "product-preview-alias@b2c-dk-da",
+            "index_pattern": "product-preview-index@"
         },
         {
             "name": "analysis",
-            "alias": "analysis-alias@b2c-dk-da"
+            "alias": "analysis-alias@b2c-dk-da",
+            "index_pattern": "analysis-index@"
         }
     ]
 }

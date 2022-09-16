@@ -17,8 +17,8 @@ class StatusTable(Widget):
             status = get_status(ElasticsearchConfiguration.config)
             table = status.to_table()
             return Align.center(table)
-        except Exception:
-            return Align.center('Lost connection to elasticsearch.')
+        except Exception as e:
+            return Align.center('Lost connection to elasticsearch.\nMessage:\n' + str(e))
 
 
 class StatusApp(App):

@@ -36,19 +36,3 @@ class ElasticsearchStatus:
                         alias.get_document_count())
 
         return table
-        
-    """
-    def print(self):
-        # print status
-        print(f'Elasticsearch Instance: {self.config.get_url()}')
-
-        # alias table
-        table = PrettyTable(['name', 'alias', 'status', 'created', 'docs'])
-        for name, alias in zip(self.aliases, self.aliases.values()):
-            if not alias:
-                table.add_row([name, '', '-', '', ''])
-            else:
-                table.add_row([name, alias.alias, alias.get_status(
-                ), alias.get_age(), alias.get_document_count()])
-        print(table)
-    """
