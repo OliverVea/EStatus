@@ -2,11 +2,12 @@ from elastic_status.models.tracked_alias import TrackedAlias
 import json
 
 class ElasticsearchConfiguration:
-    def __init__(self, hostname: str, port: int, refresh_seconds: float, tracked_aliases: list[dict], **_):
+    def __init__(self, hostname: str, port: int, refresh_seconds: float, tracked_aliases: list[dict], segment: str, **_):
         self.hostname = hostname
         self.port = port
         self.refresh_seconds = refresh_seconds
         self.tracked_aliases = [TrackedAlias(**tracked_alias) for tracked_alias in tracked_aliases]
+        self.segment = segment
 
     def get_url(self):
         return f'{self.hostname}:{self.port}'

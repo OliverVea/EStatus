@@ -41,3 +41,7 @@ def get_status(config: ElasticsearchConfiguration) -> ElasticsearchStatus:
         elasticsearch_status.add_alias(tracked_alias.name, alias_status)
 
     return elasticsearch_status
+
+def delete_indices(config: ElasticsearchConfiguration):
+    url = 'http://' + config.get_url() + '/*b2c-dk-da*'
+    requests.delete(url)

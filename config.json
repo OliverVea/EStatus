@@ -1,7 +1,8 @@
 {
     "hostname": "localhost",
     "port": 9200,
-    "refresh_seconds": 0.3,
+    "refresh_seconds": 0.1,
+    "segment": "b2c-dk-da",
     "tracked_aliases": [
         {
             "name": "product",
