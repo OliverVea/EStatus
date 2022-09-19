@@ -17,14 +17,7 @@ class AliasStatus:
     def _draw_aliased_index(self, table: Table) -> None:
         aliased_index = self._get_aliased_index()
         if aliased_index == None: return
-
-        table.add_row([
-            self.alias.alias,
-            f'__{aliased_index.index}__',
-            aliased_index.get_status(),
-            aliased_index.get_age(),
-            aliased_index.get_document_count()
-        ])
+        self._draw_index(table, aliased_index, highlighted=True)
 
 
     def _get_aliased_index(self) -> Index | None:
@@ -32,16 +25,20 @@ class AliasStatus:
         return aliased_indices[0] if len(aliased_indices) > 0 else None
 
     def _draw_other_indices(self, table: Table):
-        other_indices = [index for index in self.indices if self.alias.index != index.index]
-
         for index in self.indices:
             if index.index == self.alias.index: continue
+            self._draw_index(index)
 
-            table.add_row([
-                self.alias.alias,
-                index.index,
-                index.get_status(),
-                index.get_age(),
-                index.get_document_count()
-            ])
-        pass
+    def _draw_index(self, table: Table, index: Index, highlighted: bool = False):
+        row = [
+            self.alias.alias,
+            index.index,
+            index.get_status(),
+            index.get_age(),
+            index.get_document_count()
+        ]
+
+        if highlighted:
+            row = [f'__{cell}__' for cell in row]
+
+        table.add_row(row)
