@@ -22,6 +22,7 @@ class ElasticsearchStatus:
         table.add_column('Docs', justify='right')
 
         for alias in self.aliases.values():
+            if alias == None: continue
             alias.add_rows(table)
 
         return table

@@ -1,22 +1,22 @@
 {
     "hostname": "localhost",
     "port": 9200,
-    "refresh_seconds": 1.0,
+    "refresh_seconds": 0.3,
     "tracked_aliases": [
         {
             "name": "product",
             "alias": "searchableproducts@b2c-dk-da",
-            "index_pattern": "product-index@"
+            "index_pattern": "product-index@b2c-dk-da"
         },
         {
             "name": "preview",
             "alias": "product-preview-alias@b2c-dk-da",
-            "index_pattern": "product-preview-index@"
+            "index_pattern": "product-preview-index@b2c-dk-da"
         },
         {
             "name": "analysis",
             "alias": "analysis-alias@b2c-dk-da",
-            "index_pattern": "analysis-index@"
+            "index_pattern": "analysis-index@b2c-dk-da"
         }
     ]
 }

@@ -29,15 +29,10 @@ def get_status(config: ElasticsearchConfiguration) -> ElasticsearchStatus:
     indices = {index.index: index for index in indices}
 
     for tracked_alias in config.tracked_aliases:
-        if not tracked_alias.alias in aliases:
-            elasticsearch_status.add_alias(tracked_alias.name, None)
-            continue
-
-        alias = aliases[tracked_alias.alias]
-
-        if not alias.index in indices:
-            elasticsearch_status.add_alias(tracked_alias.name, None)
-            continue
+        if tracked_alias.alias in aliases:
+            alias = aliases[tracked_alias.alias]
+        else:
+            alias = Alias(tracked_alias.alias, '')
 
         alias_indices = [indices[index_name] for index_name in indices if tracked_alias.index_in_alias(index_name)]
 
