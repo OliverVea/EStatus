@@ -4,8 +4,8 @@ import elastic_status.request as r
 
 r.disable_insecure_request_warning()
 
-def ecommercesearch(endpoint: str, parameters: dict = {}):
-    token = r.get_token("searchapi/")
+def ecommercesearch(config: Configuration, endpoint: str, parameters: dict = {}):
+    token = r.get_token(config)
 
     request = r.Request(
         host="https://localhost",
@@ -19,4 +19,4 @@ def ecommercesearch(endpoint: str, parameters: dict = {}):
     return request
 
 def publish(config: Configuration) -> None:
-    ecommercesearch(f'/api/search/segments/{config.segment}/publication/_publish').post('{"comment": "EStatus publication"}')
+    ecommercesearch(config, f'/api/search/segments/{config.segment}/publication/_publish').post('{"comment": "EStatus publication"}')

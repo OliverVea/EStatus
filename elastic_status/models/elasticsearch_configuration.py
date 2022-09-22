@@ -16,7 +16,7 @@ class Configuration:
         self.refresh_seconds = refresh_seconds
         self.tracked_aliases = [TrackedAlias(**tracked_alias) for tracked_alias in tracked_aliases]
         self.segment = segment
-        self.oidc = OidcConfiguration(*oidc)
+        self.oidc = OidcConfiguration(**oidc)
 
     def get_url(self):
         return f'{self.hostname}:{self.port}'
