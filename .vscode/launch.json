@@ -8,7 +8,7 @@
             "name": "StatusApp",
             "type": "python",
             "request": "launch",
-            "program": "elastic_status.py",
+            "program": "main.py",
             "console": "externalTerminal",
             "justMyCode": true
         }

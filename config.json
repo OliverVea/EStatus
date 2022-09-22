@@ -19,5 +19,12 @@
             "alias": "analysis-alias@b2c-dk-da",
             "index_pattern": "analysis-index@b2c-dk-da"
         }
-    ]
+    ],
+    "oidc": {
+        "authority": "https://auth.bzk.hdk",
+        "identity": "https://iam.bzk.hdk",
+        "scope": "commercialsortapi/",
+        "client_id": "search-internal",
+        "client_secret": "search-internal-secret"
+    }
 }

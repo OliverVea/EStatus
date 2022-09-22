@@ -1,10 +1,10 @@
-from elastic_status.models.elasticsearch_configuration import ElasticsearchConfiguration
+from elastic_status.models.elasticsearch_configuration import Configuration
 from elastic_status.models.alias_status import AliasStatus
 
 from rich.table import Table
 
 class ElasticsearchStatus:
-    def __init__(self, config: ElasticsearchConfiguration):
+    def __init__(self, config: Configuration):
         self.config = config
         self.aliases: dict[str, AliasStatus] = {}
 

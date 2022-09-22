@@ -1,25 +1,26 @@
-from elastic_status import Alias, Index, ElasticsearchConfiguration, ElasticsearchStatus, AliasStatus
+from elastic_status import Alias, Index, Configuration, ElasticsearchStatus, AliasStatus
 import requests
 
-def cat_aliases(config: ElasticsearchConfiguration) -> list[Alias]:
+def cat_aliases(config: Configuration) -> list[Alias]:
     url = 'http://' + config.get_url() + '/_cat/aliases'
-    response = requests.get(
-        url, params={'format': 'application/json', 'h': 'alias,index'})
+    params = {'format': 'application/json', 'h': 'alias,index'}
+    response = requests.get(url, params=params, timeout=1)
     response = response.json()
     aliases = [Alias(**alias) for alias in response]
     return aliases
 
 
-def cat_indices(config: ElasticsearchConfiguration) -> list[Index]:
+def cat_indices(config: Configuration) -> list[Index]:
     url = 'http://' + config.get_url() + '/_cat/indices'
-    response = requests.get(url, params={
-                            'format': 'application/json', 'h': 'index,health,docs.count,creation.date'})
+
+    params = {'format': 'application/json', 'h': 'index,health,docs.count,creation.date'}
+    response = requests.get(url, params=params, timeout=1)
     response = response.json()
     indices = [Index(**index) for index in response]
     return indices
 
 
-def get_status(config: ElasticsearchConfiguration) -> ElasticsearchStatus:
+def get_status(config: Configuration) -> ElasticsearchStatus:
     elasticsearch_status = ElasticsearchStatus(config)
 
     aliases = cat_aliases(config)
@@ -42,6 +43,7 @@ def get_status(config: ElasticsearchConfiguration) -> ElasticsearchStatus:
 
     return elasticsearch_status
 
-def delete_indices(config: ElasticsearchConfiguration):
+
+def clear_indices(config: Configuration):
     url = 'http://' + config.get_url() + '/*b2c-dk-da*'
-    requests.delete(url)
+    requests.delete(url, timeout=1)

@@ -1,9 +1,0 @@
-{
-    "Oidc": {
-        "authority": "https://auth.bzk.hdk",
-        "identity": "https://iam.bzk.hdk",
-        "scope": "commercialsortapi/",
-        "client_id": "search-internal",
-        "client_secret": "search-internal-secret"
-    }
-}

@@ -1,5 +1,5 @@
-from elastic_status import ElasticsearchConfiguration, StatusApp
+from elastic_status import Configuration, StatusApp
 
-ElasticsearchConfiguration.from_config('config.json')
+Configuration.from_config('config.json')
 
 StatusApp.run()

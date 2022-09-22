@@ -1,6 +1,28 @@
 import requests
 from requests.models import Response
+from urllib.parse import urljoin
 
+from elastic_status.models import Configuration
+
+
+def get_token(config: Configuration, verify: bool = False):
+    headers = {
+        'content-type': 'application/x-www-form-urlencoded'
+    }
+
+    data = {
+        'grant_type': 'client_credentials',
+        'audience': config.oidc.scope,
+        'client_id': config.oidc.client_id,
+        'client_secret': config.oidc.client_secret
+    }
+
+    url = urljoin(config.oidc.authority, 'connect/token')
+
+    response = requests.post(url, headers=headers, data=data, verify=verify)
+    content = response.json()
+
+    return content['access_token']
 
 def disable_insecure_request_warning():
     from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -80,6 +102,3 @@ class Request:
             params = self.parameters,
             verify = verify
         )
-
-
-

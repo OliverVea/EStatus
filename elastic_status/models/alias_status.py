@@ -3,7 +3,6 @@ from elastic_status.models.alias import Alias
 from elastic_status.models.index import Index
 
 from rich.table import Table
-from textual.widgets import Button
 
 class AliasStatus:
     def __init__(self, tracked_alias: TrackedAlias, alias: Alias, indices: list[Index]):
@@ -53,4 +52,6 @@ class AliasStatus:
             index.get_document_count()
         ]
 
-        table.add_row(*row, style='bold' if highlighted else 'dim')
+        style = 'bold' if highlighted else 'dim'
+
+        table.add_row(*row, style=style)
