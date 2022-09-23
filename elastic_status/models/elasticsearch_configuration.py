@@ -1,13 +1,7 @@
 from elastic_status.models.tracked_alias import TrackedAlias
 import json
 
-class OidcConfiguration:
-    def __init__(self, authority: str, identity: str, scope: str, client_id: str, client_secret: str, **_):
-        self.authority = authority
-        self.identity = identity
-        self.scope = scope
-        self.client_id = client_id
-        self.client_secret = client_secret
+from elastic_status.services.request import OidcConfiguration
 
 class Configuration:
     def __init__(self, hostname: str, port: int, refresh_seconds: float, tracked_aliases: list[dict], segment: str, oidc: dict, **_):

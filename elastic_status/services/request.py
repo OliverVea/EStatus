@@ -2,24 +2,29 @@ import requests
 from requests.models import Response
 from urllib.parse import urljoin
 
-from elastic_status.models import Configuration
+class OidcConfiguration:
+    def __init__(self, authority: str, identity: str, scope: str, client_id: str, client_secret: str, **_):
+        self.authority = authority
+        self.identity = identity
+        self.scope = scope
+        self.client_id = client_id
+        self.client_secret = client_secret
 
-
-def get_token(config: Configuration, verify: bool = False):
+def get_token(config: OidcConfiguration, verify: bool = False):
     headers = {
         'content-type': 'application/x-www-form-urlencoded'
     }
 
     data = {
         'grant_type': 'client_credentials',
-        'audience': config.oidc.scope,
-        'client_id': config.oidc.client_id,
-        'client_secret': config.oidc.client_secret
+        'audience': config.scope,
+        'client_id': config.client_id,
+        'client_secret': config.client_secret
     }
 
-    url = urljoin(config.oidc.authority, 'connect/token')
+    url = urljoin(config.authority, 'connect/token')
 
-    response = requests.post(url, headers=headers, data=data, verify=verify)
+    response = requests.post(url, headers=headers, data=data, verify=verify, timeout=1)
     content = response.json()
 
     return content['access_token']
@@ -74,7 +79,8 @@ class Request:
             url = self.get_url(),
             headers = self.get_headers(),
             params = self.parameters,
-            verify = verify
+            verify = verify,
+            timeout=0.5
         )
 
     def post(self, data: str, verify: bool = False) -> Response:
@@ -84,6 +90,7 @@ class Request:
             params = self.parameters,
             data = data,
             verify = verify,
+            timeout=0.5
         )
 
     def put(self, data: str, verify: bool = False) -> Response:
@@ -93,6 +100,7 @@ class Request:
             params = self.parameters,
             data = data,
             verify = verify,
+            timeout=0.5
         )
     
     def delete(self, verify: bool = False) -> Response:
@@ -100,5 +108,21 @@ class Request:
             url = self.get_url(),
             headers = self.get_headers(),
             params = self.parameters,
-            verify = verify
+            verify = verify,
+            timeout=0.5
         )
+
+
+def ecommercesearch(config: OidcConfiguration, endpoint: str, parameters: dict = {}):
+    token = get_token(config)
+
+    request = Request(
+        host="https://localhost",
+        port="5124",
+        endpoint=endpoint,
+        token=token,
+        parameters = parameters,
+        headers={'content-type': 'application/json'}
+    )
+
+    return request
