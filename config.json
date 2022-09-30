@@ -18,6 +18,11 @@
             "name": "analysis",
             "alias": "analysis-alias@b2c-dk-da",
             "index_pattern": "analysis-index@b2c-dk-da"
+        },
+        {
+            "name": "suggestion",
+            "alias": "searchablesuggestions@b2c-dk-da",
+            "index_pattern": "suggestion-index@b2c-dk-da"
         }
     ],
     "oidc": {

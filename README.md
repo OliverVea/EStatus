@@ -12,5 +12,7 @@ python -m pip install -r requirements.txt
 ## RUNNING ##
 The application can be run with `python main.py`
 
+Using the windows terminal app or another modern terminal is highly recommended.
+
 ## CONFIGURATION ##
-Configs for the application are available in `config.json`.
+Configurations for the application are available in `config.json`.
