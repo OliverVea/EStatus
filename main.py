@@ -1,7 +1,3 @@
-import logging
-
-logging.basicConfig(filename='log.txt')
-
 from elastic_status import StatusApp
 from elastic_status.models import Configuration
 
