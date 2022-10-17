@@ -1,5 +1,4 @@
 # README #
-_If Anne or Søren reads this, I promise I only spent two train rides on this app._
 
 ## INSTALLATION ##
 Run the following commands:

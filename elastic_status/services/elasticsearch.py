@@ -1,13 +1,16 @@
 import requests
+import logging
 
 from elastic_status.models import Alias, Index, Configuration, ElasticsearchStatus, AliasStatus
 
 def cat_aliases(config: Configuration) -> list[Alias]:
     url = 'http://' + config.get_url() + '/_cat/aliases'
+    logging.info('Requesting aliases from elasticsearch: {Url}', url)
     params = {'format': 'application/json', 'h': 'alias,index'}
     response = requests.get(url, params=params, timeout=0.5)
     response = response.json()
     aliases = [Alias(**alias) for alias in response]
+    logging.info('Got %d aliases: %s', len(aliases), ', '.join(alias.alias for alias in aliases))
     return aliases
 
 
