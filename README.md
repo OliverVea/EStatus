@@ -3,7 +3,7 @@
 ## INSTALLATION ##
 Run the following commands:
 ```
-git clone https://olve-bizzkit-B2Hfeq@bitbucket.org/olve-bizzkit-b2hfeq/elastic-status.git ./elastic-status
+git clone https://github.com/OliverVea/EStatus.git ./elastic-status
 cd ./elastic-status
 python -m pip install -r requirements.txt
 ```
